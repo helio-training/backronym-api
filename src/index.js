@@ -1,11 +1,15 @@
 import { Server } from 'hapi';
 
+import BackronymPlugin from './plugins/backronym';
+
+
 const server = new Server({});
 
 const port = process.env.PORT || 4000;
 const env = process.env.NODE_ENV || 'development';
 server.connection({
-  port, router: {
+  port,
+  router: {
     isCaseSensitive: false
   },
   routes: {
@@ -19,6 +23,8 @@ server.register([
   require('blipp'),
   require('tv'),
   require('hapi-async-handler'),
+  BackronymPlugin,
+  
   {
     register: require('hapi-swagger'),
     options: {
